@@ -73,6 +73,19 @@ Each time you submit a prompt to GitHub Copilot CLI, your monthly quota of premi
 
 For more information about how to use the GitHub Copilot CLI, see [our official documentation](https://docs.github.com/copilot/concepts/agents/about-copilot-cli).
 
+## 🔧 Integration
+
+Looking to integrate Copilot CLI into your development workflow? Check out our comprehensive resources:
+
+- **[Integration Guide](INTEGRATION.md)** - Detailed instructions for terminal, VS Code, MCP servers, Git hooks, and CI/CD integration
+- **[Examples Directory](examples/)** - Ready-to-use scripts, configurations, and workflow templates
+
+Quick start integrations:
+
+- **Terminal Setup**: Run `/terminal-setup` in Copilot CLI to set up shell integration
+- **MCP Servers**: Configure custom tools via `~/.copilot/mcp-config.json` ([examples](examples/mcp-configs/))
+- **Automation Scripts**: Use our [example scripts](examples/scripts/) for code review, test generation, and more
+- **CI/CD**: Add automated reviews with our [GitHub Actions](examples/workflows/github-actions-review.yml) or [GitLab CI](examples/workflows/gitlab-ci-review.yml) templates
 
 ## 📢 Feedback and Participation
 
