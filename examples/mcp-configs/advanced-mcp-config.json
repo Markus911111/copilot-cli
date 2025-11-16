@@ -1,0 +1,70 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "${HOME}/projects"],
+      "tools": ["*"]
+    },
+    "github": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      },
+      "tools": ["*"]
+    },
+    "git": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git"],
+      "tools": ["*"]
+    },
+    "postgres": {
+      "type": "local",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-postgres",
+        "postgresql://localhost:5432/mydb"
+      ],
+      "env": {
+        "PGUSER": "${PGUSER}",
+        "PGPASSWORD": "${PGPASSWORD}"
+      },
+      "tools": ["*"]
+    },
+    "sequential-thinking": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "tools": ["*"]
+    },
+    "puppeteer": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "tools": ["*"]
+    },
+    "brave-search": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
+      },
+      "tools": ["*"]
+    },
+    "slack": {
+      "type": "local",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "${SLACK_BOT_TOKEN}",
+        "SLACK_TEAM_ID": "${SLACK_TEAM_ID}"
+      },
+      "tools": ["*"]
+    }
+  }
+}

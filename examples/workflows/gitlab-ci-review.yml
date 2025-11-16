@@ -1,0 +1,48 @@
+stages:
+  - review
+
+copilot-review:
+  stage: review
+  image: node:22
+  
+  before_script:
+    - npm install -g @github/copilot
+  
+  script:
+    # Get merge request diff
+    - git diff ${CI_MERGE_REQUEST_TARGET_BRANCH_SHA}...${CI_COMMIT_SHA} > mr_diff.txt
+    
+    # Review with Copilot
+    - |
+      copilot -p "Review these changes for:
+      1. Code quality issues
+      2. Security vulnerabilities
+      3. Performance problems
+      4. Best practices violations
+      
+      Provide specific, actionable feedback." < mr_diff.txt > review.txt
+    
+    # Display review
+    - cat review.txt
+    
+    # Post as MR comment (requires GitLab token with api scope)
+    - |
+      if [ -n "$GITLAB_TOKEN" ]; then
+        COMMENT=$(cat review.txt | jq -Rs .)
+        curl --request POST \
+          --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
+          --header "Content-Type: application/json" \
+          --data "{\"body\": \"## 🤖 Copilot CLI Review\n\n$COMMENT\"}" \
+          "${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/merge_requests/${CI_MERGE_REQUEST_IID}/notes"
+      fi
+  
+  only:
+    - merge_requests
+  
+  variables:
+    GITHUB_TOKEN: $COPILOT_GITHUB_TOKEN
+  
+  artifacts:
+    paths:
+      - review.txt
+    expire_in: 1 week
